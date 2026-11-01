@@ -42,8 +42,8 @@ body.menu-open {
   overflow: hidden;
 }
 
-body.menu-open .site-header {
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+.mobile-nav-backdrop {
+  display: none;
 }
 
 img {
@@ -182,10 +182,6 @@ ul {
 
 .menu-toggle.open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
-}
-
-.nav-mobile-backdrop {
-  display: none;
 }
 
 /* ——— Hero ——— */
@@ -1577,34 +1573,32 @@ body.popup-open {
     grid-template-columns: 1fr;
   }
 
-  .nav-mobile-backdrop {
+  .mobile-nav-backdrop {
     display: block;
     position: fixed;
     inset: 0;
-    z-index: 2400;
+    z-index: 999;
     background: #061018;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease, visibility 0.3s;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
 
-  .nav-mobile-backdrop.is-active {
+  body.menu-open .mobile-nav-backdrop {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
   }
 
   .site-header {
-    background: #0a1628;
+    z-index: 1001;
     background: linear-gradient(
       135deg,
       #061018 0%,
       #0d2847 52%,
       #0a1628 100%
     );
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
     border-bottom: 1px solid rgba(78, 205, 196, 0.22);
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.4),
@@ -1614,7 +1608,6 @@ body.popup-open {
   .site-header.scrolled,
   body.menu-open .site-header,
   .site-header.menu-active {
-    background: #0a1628;
     background: linear-gradient(
       135deg,
       #061018 0%,
@@ -1626,20 +1619,15 @@ body.popup-open {
     border-bottom-color: rgba(245, 197, 24, 0.28);
   }
 
-  body.menu-open .site-header,
-  .site-header.menu-active {
-    z-index: 2500;
-  }
-
   .site-header .brand {
     position: relative;
-    z-index: 2502;
+    z-index: 1002;
   }
 
   .menu-toggle {
     display: flex;
     position: relative;
-    z-index: 2502;
+    z-index: 1002;
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 12px;
@@ -1655,45 +1643,44 @@ body.popup-open {
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 2450;
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    z-index: 1000;
     flex-direction: column;
     justify-content: flex-start;
     padding: calc(var(--nav-h) + 1.25rem) 1.25rem 2rem;
     padding-top: calc(var(--nav-h) + max(1.25rem, env(safe-area-inset-top, 0px)));
     gap: 0.65rem;
-    background-color: #061018;
-    background-image: linear-gradient(168deg, #061018 0%, #0d2847 42%, #0a1628 100%);
-    border-left: 1px solid rgba(78, 205, 196, 0.2);
-    box-shadow: -12px 0 48px rgba(0, 0, 0, 0.55);
+    background: #0a1628;
+    background-image: linear-gradient(
+      165deg,
+      #061018 0%,
+      #0d2847 48%,
+      #0a1628 100%
+    );
+    border-left: 1px solid rgba(78, 205, 196, 0.15);
+    box-shadow: -12px 0 48px rgba(0, 0, 0, 0.5);
     transform: translateX(100%);
-    transition: transform 0.35s ease;
+    transition: transform 0.35s ease, visibility 0.35s ease;
     visibility: hidden;
     pointer-events: none;
     overflow-y: auto;
-    -webkit-transform: translateX(100%);
-    isolation: isolate;
+    -webkit-overflow-scrolling: touch;
+    opacity: 1;
   }
 
   .nav-links::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: #061018;
-    z-index: -2;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.5;
     pointer-events: none;
-  }
-
-  .nav-links::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 100% 70% at 100% 0%, rgba(45, 125, 210, 0.35), transparent 55%),
-      radial-gradient(ellipse 80% 50% at 0% 100%, rgba(78, 205, 196, 0.15), transparent 50%);
-    z-index: -1;
-    pointer-events: none;
+    z-index: 0;
   }
 
   .nav-links.open {
@@ -1709,8 +1696,8 @@ body.popup-open {
     padding: 1rem 1.15rem;
     font-size: 1.05rem;
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #122a45;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--white);
   }
 
