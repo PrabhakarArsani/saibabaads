@@ -1,0 +1,23 @@
+{
+  "name": "Sai Baba Ads",
+  "short_name": "Sai Baba Ads",
+  "description": "LED screens, LED boards, UV and flex printing in Meerpet, Hyderabad.",
+  "icons": [
+    {
+      "src": "favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#0d2847",
+  "background_color": "#0d2847",
+  "display": "standalone",
+  "lang": "en-IN"
+}
