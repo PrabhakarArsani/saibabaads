@@ -229,11 +229,18 @@ ul {
 .hero-content {
   position: relative;
   z-index: 2;
+  width: 100%;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   gap: 3rem;
   align-items: center;
   padding: 4rem 0 5rem;
+}
+
+.hero-text,
+.hero-visual {
+  opacity: 1;
+  transform: none;
 }
 
 .hero-badge {
@@ -261,10 +268,16 @@ ul {
 }
 
 .hero h1 .highlight {
-  background: linear-gradient(90deg, var(--gold-soft), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .hero h1 .highlight {
+    background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 .hero-lead {
@@ -1520,18 +1533,38 @@ body.popup-open {
   }
 
   .hero {
-    min-height: auto;
+    display: block;
+    min-height: 0;
+    padding-top: calc(var(--nav-h) + 0.75rem);
     padding-bottom: 2rem;
   }
 
   .hero-content {
-    padding: 2rem 0 2.5rem;
-    gap: 2rem;
+    padding: 1.25rem 0 2rem;
+    gap: 1.75rem;
   }
 
-  .hero .reveal {
-    opacity: 1;
-    transform: none;
+  .hero h1 {
+    font-size: clamp(1.85rem, 8.5vw, 2.65rem);
+  }
+
+  .hero-lead {
+    font-size: 1rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .work-marquee--hero .work-marquee-item img {
+    width: 160px;
+    height: 108px;
   }
 
   .hero-collage {

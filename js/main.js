@@ -123,6 +123,10 @@
     }
   });
 
+  document.querySelectorAll(".hero-text, .hero-visual").forEach((el) => {
+    el.classList.add("visible");
+  });
+
   const revealEls = document.querySelectorAll(".reveal");
   if (revealEls.length && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
@@ -134,16 +138,12 @@
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px 0px 0px" }
     );
     revealEls.forEach((el) => io.observe(el));
   } else {
     revealEls.forEach((el) => el.classList.add("visible"));
   }
-
-  document.querySelectorAll(".hero .reveal").forEach((el) => {
-    el.classList.add("visible");
-  });
 
   document.querySelectorAll("[data-count]").forEach((el) => {
     const target = parseInt(el.getAttribute("data-count"), 10);

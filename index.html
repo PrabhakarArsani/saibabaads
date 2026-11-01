@@ -462,6 +462,14 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Hero must show immediately on mobile (no scroll-reveal delay) */
+      .hero-text,
+      .hero-visual {
+        opacity: 1;
+        transform: none;
+      }
+    </style>
   </head>
   <body>
     <div class="print-texture" aria-hidden="true"></div>
@@ -490,7 +498,7 @@
         <div class="hero-bg"></div>
         <div class="hero-grid"></div>
         <div class="container hero-content">
-          <div class="hero-text reveal">
+          <div class="hero-text">
             <p class="hero-badge">Hyderabad · Meerpet</p>
             <h1>
               A Complete<br />
@@ -505,7 +513,7 @@
               <a href="tel:+919703333878" class="btn btn-outline">Call +91 970 3333 878</a>
             </div>
           </div>
-          <div class="hero-visual reveal">
+          <div class="hero-visual">
             <div class="hero-marquee-label">Live from our studio</div>
             <div class="work-marquee work-marquee--hero" aria-label="Recent project photos">
               <div class="work-marquee-track" data-marquee-track data-marquee-hero></div>
