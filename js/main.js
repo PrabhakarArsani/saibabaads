@@ -94,6 +94,9 @@
       const open = navLinks.classList.toggle("open");
       toggle.classList.toggle("open", open);
       document.body.classList.toggle("menu-open", open);
+      if (header) {
+        header.classList.toggle("scrolled", open || window.scrollY > 40);
+      }
     });
 
     navLinks.querySelectorAll("a").forEach((link) => {
@@ -101,6 +104,9 @@
         navLinks.classList.remove("open");
         toggle.classList.remove("open");
         document.body.classList.remove("menu-open");
+        if (header) {
+          header.classList.toggle("scrolled", window.scrollY > 40);
+        }
       });
     });
   }
@@ -134,6 +140,10 @@
   } else {
     revealEls.forEach((el) => el.classList.add("visible"));
   }
+
+  document.querySelectorAll(".hero .reveal").forEach((el) => {
+    el.classList.add("visible");
+  });
 
   document.querySelectorAll("[data-count]").forEach((el) => {
     const target = parseInt(el.getAttribute("data-count"), 10);
