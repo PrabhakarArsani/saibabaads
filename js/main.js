@@ -80,34 +80,9 @@
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
-  const navInner = header?.querySelector(".nav-inner");
-  const mobileNavMq = window.matchMedia("(max-width: 768px)");
-
-  let navBackdrop = document.querySelector(".mobile-nav-backdrop");
-  if (!navBackdrop) {
-    navBackdrop = document.createElement("div");
-    navBackdrop.className = "mobile-nav-backdrop";
-    navBackdrop.setAttribute("aria-hidden", "true");
-    document.body.insertBefore(navBackdrop, document.body.firstChild);
-  }
-
-  const syncMobileNavPlacement = () => {
-    if (!navLinks || !navInner) return;
-    if (mobileNavMq.matches) {
-      if (navLinks.parentElement !== document.body) {
-        document.body.appendChild(navLinks);
-      }
-    } else if (navLinks.parentElement === document.body) {
-      navInner.appendChild(navLinks);
-    }
-  };
-
-  syncMobileNavPlacement();
-  mobileNavMq.addEventListener("change", syncMobileNavPlacement);
 
   if (header) {
     const onScroll = () => {
-      if (document.body.classList.contains("menu-open")) return;
       header.classList.toggle("scrolled", window.scrollY > 40);
     };
     onScroll();
@@ -115,29 +90,24 @@
   }
 
   if (toggle && navLinks) {
-    const setMenuOpen = (open) => {
-      navLinks.classList.toggle("open", open);
+    toggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
       toggle.classList.toggle("open", open);
       document.body.classList.toggle("menu-open", open);
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-      navBackdrop.setAttribute("aria-hidden", open ? "false" : "true");
       if (header) {
-        header.classList.toggle("menu-active", open);
         header.classList.toggle("scrolled", open || window.scrollY > 40);
       }
-    };
-
-    const closeMenu = () => setMenuOpen(false);
-
-    toggle.addEventListener("click", () => {
-      setMenuOpen(!navLinks.classList.contains("open"));
     });
 
-    navBackdrop.addEventListener("click", closeMenu);
-
     navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu);
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        toggle.classList.remove("open");
+        document.body.classList.remove("menu-open");
+        if (header) {
+          header.classList.toggle("scrolled", window.scrollY > 40);
+        }
+      });
     });
   }
 

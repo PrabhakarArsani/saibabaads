@@ -42,10 +42,6 @@ body.menu-open {
   overflow: hidden;
 }
 
-.mobile-nav-backdrop {
-  display: none;
-}
-
 img {
   max-width: 100%;
   height: auto;
@@ -1573,50 +1569,33 @@ body.popup-open {
     grid-template-columns: 1fr;
   }
 
-  .mobile-nav-backdrop {
-    display: block;
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: #061018;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-  }
-
-  body.menu-open .mobile-nav-backdrop {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-  }
-
   .site-header {
-    z-index: 1001;
     background: linear-gradient(
       135deg,
-      #061018 0%,
-      #0d2847 52%,
-      #0a1628 100%
+      #0a1628 0%,
+      #0d2847 50%,
+      #1a4d8c 100%
     );
-    border-bottom: 1px solid rgba(78, 205, 196, 0.22);
-    box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.4),
-      inset 0 -1px 0 rgba(245, 197, 24, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   }
 
-  .site-header.scrolled,
-  body.menu-open .site-header,
-  .site-header.menu-active {
+  .site-header.scrolled {
     background: linear-gradient(
       135deg,
-      #061018 0%,
-      #0d2847 52%,
-      #0a1628 100%
+      #0a1628 0%,
+      #0d2847 55%,
+      #1a4d8c 100%
     );
     backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border-bottom-color: rgba(245, 197, 24, 0.28);
+  }
+
+  body.menu-open .site-header {
+    background: linear-gradient(
+      180deg,
+      #0a1628 0%,
+      #0d2847 100%
+    );
+    box-shadow: 0 4px 28px rgba(0, 0, 0, 0.4);
   }
 
   .site-header .brand {
@@ -1628,59 +1607,30 @@ body.popup-open {
     display: flex;
     position: relative;
     z-index: 1002;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 12px;
-    transition: background 0.25s, border-color 0.25s;
-  }
-
-  .menu-toggle.open {
-    background: rgba(245, 197, 24, 0.12);
-    border-color: rgba(245, 197, 24, 0.35);
   }
 
   .nav-links {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    height: 100dvh;
-    z-index: 1000;
+    right: 0;
+    bottom: 0;
+    z-index: 1001;
     flex-direction: column;
     justify-content: flex-start;
-    padding: calc(var(--nav-h) + 1.25rem) 1.25rem 2rem;
-    padding-top: calc(var(--nav-h) + max(1.25rem, env(safe-area-inset-top, 0px)));
-    gap: 0.65rem;
-    background: #0a1628;
-    background-image: linear-gradient(
+    padding: calc(var(--nav-h) + 1.5rem) 2rem 2rem;
+    gap: 0.5rem;
+    background: linear-gradient(
       165deg,
       #061018 0%,
-      #0d2847 48%,
+      #0d2847 32%,
+      #1a5a9e 58%,
       #0a1628 100%
     );
-    border-left: 1px solid rgba(78, 205, 196, 0.15);
-    box-shadow: -12px 0 48px rgba(0, 0, 0, 0.5);
     transform: translateX(100%);
-    transition: transform 0.35s ease, visibility 0.35s ease;
+    transition: transform 0.35s ease;
     visibility: hidden;
     pointer-events: none;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    opacity: 1;
-  }
-
-  .nav-links::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 32px 32px;
-    opacity: 0.5;
-    pointer-events: none;
-    z-index: 0;
   }
 
   .nav-links.open {
@@ -1690,32 +1640,9 @@ body.popup-open {
   }
 
   .nav-links a {
-    position: relative;
-    z-index: 1;
     width: 100%;
-    padding: 1rem 1.15rem;
+    padding: 1rem;
     font-size: 1.05rem;
-    border-radius: 14px;
-    background: #122a45;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    color: var(--white);
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    background: linear-gradient(
-      135deg,
-      rgba(245, 197, 24, 0.14),
-      rgba(78, 205, 196, 0.1)
-    );
-    border-color: rgba(245, 197, 24, 0.35);
-    color: var(--white);
-  }
-
-  .nav-links .nav-cta {
-    margin-top: 0.35rem;
-    border: none !important;
-    box-shadow: 0 8px 28px rgba(245, 197, 24, 0.3);
   }
 
   .hero {
