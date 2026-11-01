@@ -81,8 +81,29 @@
   const toggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
 
+  let navBackdrop = document.querySelector(".nav-mobile-backdrop");
+  if (!navBackdrop) {
+    navBackdrop = document.createElement("div");
+    navBackdrop.className = "nav-mobile-backdrop";
+    navBackdrop.setAttribute("aria-hidden", "true");
+    document.body.appendChild(navBackdrop);
+  }
+
+  const setMobileMenuOpen = (open) => {
+    navLinks?.classList.toggle("open", open);
+    toggle?.classList.toggle("open", open);
+    document.body.classList.toggle("menu-open", open);
+    navBackdrop.classList.toggle("is-active", open);
+    navBackdrop.setAttribute("aria-hidden", open ? "false" : "true");
+    if (header) {
+      header.classList.toggle("menu-active", open);
+      header.classList.toggle("scrolled", open || window.scrollY > 40);
+    }
+  };
+
   if (header) {
     const onScroll = () => {
+      if (document.body.classList.contains("menu-open")) return;
       header.classList.toggle("scrolled", window.scrollY > 40);
     };
     onScroll();
@@ -91,22 +112,16 @@
 
   if (toggle && navLinks) {
     toggle.addEventListener("click", () => {
-      const open = navLinks.classList.toggle("open");
-      toggle.classList.toggle("open", open);
-      document.body.classList.toggle("menu-open", open);
-      if (header) {
-        header.classList.toggle("scrolled", open || window.scrollY > 40);
-      }
+      setMobileMenuOpen(!navLinks.classList.contains("open"));
+    });
+
+    navBackdrop.addEventListener("click", () => {
+      setMobileMenuOpen(false);
     });
 
     navLinks.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        toggle.classList.remove("open");
-        document.body.classList.remove("menu-open");
-        if (header) {
-          header.classList.toggle("scrolled", window.scrollY > 40);
-        }
+        setMobileMenuOpen(false);
       });
     });
   }
